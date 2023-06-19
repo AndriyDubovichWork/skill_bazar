@@ -1,0 +1,39 @@
+@import './../../../variables';
+.Input {
+  background-color: $secondaryBackground;
+  color: $mainText;
+
+  border: 0;
+
+  // outline: none;
+
+  border-radius: 20px;
+
+  padding: 1vh 1vw;
+
+  width: 15vw;
+
+  display: inline-block;
+  transition: outline 0.2s ease;
+}
+.Input:hover {
+  outline: 2px solid rgba(255, 255, 255, 1);
+}
+
+// when autofill inputs dont change styles
+.Input:-webkit-autofill {
+  display: inline-block;
+
+  background-image: none;
+  background-position: 0 0;
+  transition: background-color 5000s ease-in-out 0s, outline 0.2s ease;
+}
+.Input:-webkit-autofill:hover,
+.Input:-webkit-autofill:focus,
+.Input:-webkit-autofill:active {
+  outline: 2px solid rgba(255, 255, 255, 1);
+}
+
+.Input:-webkit-autofill {
+  -webkit-text-fill-color: $mainText !important;
+}

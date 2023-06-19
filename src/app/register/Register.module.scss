@@ -1,0 +1,27 @@
+.Register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 90vh;
+  width: 100vw;
+  .PasswordContainer {
+    position: relative;
+    .EyeIcon {
+      position: absolute;
+
+      top: 50%;
+      right: 10px;
+      transform: translate(-50%, -50%);
+
+      cursor: pointer;
+    }
+  }
+  .Header {
+    margin: 2vh 0;
+  }
+  input {
+    margin: 1vh 0;
+  }
+}

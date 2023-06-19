@@ -1,11 +1,17 @@
 import React from 'react';
 import classes from './NavBar.module.scss';
+import Link from 'next/link';
 
 export default function NavBar() {
   return (
     <div className={classes.NavBar}>
-      <h2 className={classes.Logo}>Logo</h2>
-      <div>hello</div>
+      <Link href={'/'} className={classes.Logo}>
+        <h2>SkillBazar Logo</h2>
+      </Link>
+      <div className={classes.Authorization}>
+        <Link href={'/register'}>register</Link>
+        <Link href={'/login'}>login</Link>
+      </div>
     </div>
   );
 }

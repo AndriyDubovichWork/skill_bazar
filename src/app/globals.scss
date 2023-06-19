@@ -1,5 +1,5 @@
-$mainBackground: #000;
-$mainText: #fff;
+@import './variables';
+
 * {
   padding: 0;
   margin: 0;
@@ -7,4 +7,7 @@ $mainText: #fff;
 
   background-color: $mainBackground;
   color: $mainText;
+}
+a {
+  text-decoration: none;
 }

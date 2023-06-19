@@ -1,0 +1,11 @@
+import React from 'react';
+import classes from './Input.module.scss';
+
+export default function Input(
+  props: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
+) {
+  return <input {...props} className={classes.Input} />;
+}

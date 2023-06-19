@@ -1,6 +1,5 @@
 import NavBar from './components/NavBar/NavBar';
 import './globals.scss';
-import './fonts.scss';
 
 export const metadata = {
   title: 'Skill Bazar',

@@ -1,0 +1,16 @@
+.Login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 90vh;
+  width: 100vw;
+
+  .Header {
+    margin: 2vh 0;
+  }
+  input {
+    margin: 1vh 0;
+  }
+}

@@ -1,0 +1,10 @@
+$mainBackground: #000;
+$mainText: #fff;
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+
+  background-color: $mainBackground;
+  color: $mainText;
+}

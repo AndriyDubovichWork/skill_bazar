@@ -11,7 +11,7 @@ export default function Login() {
 
   return (
     <form className={classes.Login}>
-      <h1 className={classes.Header}>register</h1>
+      <h1 className={classes.Header}>login</h1>
 
       <Input type='email' placeholder='email' />
       <PasswordInput

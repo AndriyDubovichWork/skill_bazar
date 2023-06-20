@@ -1,11 +1,18 @@
 import React from 'react';
 import classes from './Button.module.scss';
 
-export default function Button(
-  props: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
-) {
-  return <input {...props} className={classes.Button} type='button' />;
+interface Props
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  text: string;
+}
+
+export default function Button({ text, ...props }: Props) {
+  return (
+    <button {...props} className={classes.Button}>
+      {text}
+    </button>
+  );
 }

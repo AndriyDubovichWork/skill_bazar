@@ -1,11 +1,21 @@
 import React from 'react';
 import classes from './Input.module.scss';
-
-export default function Input(
-  props: React.DetailedHTMLProps<
+import ToolTip from '../ToolTip/ToolTip';
+interface Props
+  extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  >
-) {
-  return <input {...props} className={classes.Input} />;
+  > {
+  error: string | undefined;
+}
+export default function Input({ error, ...props }: Props) {
+  return (
+    <ToolTip errorText={error}>
+      <input
+        {...props}
+        className={classes.Input}
+        style={error ? { outline: '1px solid red' } : {}}
+      />
+    </ToolTip>
+  );
 }

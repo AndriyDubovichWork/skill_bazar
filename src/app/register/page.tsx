@@ -10,6 +10,7 @@ import PasswordInput from '../components/Styled/PasswordInput/PasswordInput';
 import { Formik } from 'formik';
 import { RegisterFormT } from './registerTypes';
 import registerSchema from './Schema';
+import ToolTip from '../components/Styled/ToolTip/ToolTip';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,46 +30,48 @@ export default function Register() {
         setSubmitting(false);
       }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form onSubmit={handleSubmit} className={classes.Register}>
+      {(formik) => (
+        <form onSubmit={formik.handleSubmit} className={classes.Register}>
           <h1 className={classes.Header}>register</h1>
 
           <Input
-            type='email'
+            error={
+              formik.touched.email && formik.errors.email
+                ? formik.errors.email
+                : ''
+            }
             placeholder='email'
-            name='email'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
+            type='email'
+            {...formik.getFieldProps('email')}
           />
           <PasswordInput
+            error={
+              formik.touched.password && formik.errors.password
+                ? formik.errors.password
+                : ''
+            }
             placeholder='enter password'
             showPassword={showPassword}
             setShowPassword={setShowPassword}
-            name='password'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
+            {...formik.getFieldProps('password')}
           />
           <PasswordInput
+            error={
+              formik.touched.passwordConfirm && formik.errors.passwordConfirm
+                ? formik.errors.passwordConfirm
+                : ''
+            }
             placeholder='repeat password'
             showPassword={showPassword}
             setShowPassword={setShowPassword}
-            name='passwordConfirm'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.passwordConfirm}
+            {...formik.getFieldProps('passwordConfirm')}
           />
 
-          <Button type={'submit'} text='register' disabled={isSubmitting} />
+          <Button
+            type={'submit'}
+            text='register'
+            disabled={formik.isSubmitting}
+          />
         </form>
       )}
     </Formik>

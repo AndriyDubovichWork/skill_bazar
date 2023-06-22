@@ -8,18 +8,24 @@ interface Props
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   > {
+  error: string | undefined;
   showPassword: boolean;
   setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function PasswordInput({
+  error,
   showPassword,
   setShowPassword,
   ...props
 }: Props) {
   return (
     <div className={classes.PasswordContainer}>
-      <Input {...props} type={showPassword ? 'text' : 'password'} />
+      <Input
+        error={error}
+        {...props}
+        type={showPassword ? 'text' : 'password'}
+      />
       {showPassword ? (
         <FaEyeSlash
           className={classes.EyeIcon}

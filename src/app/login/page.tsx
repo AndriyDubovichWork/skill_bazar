@@ -20,7 +20,7 @@ export default function Login() {
         setShowPassword={setShowPassword}
       />
 
-      <Button type={'button'} value='login' />
+      <Button type={'button'} text='login' />
     </form>
   );
 }

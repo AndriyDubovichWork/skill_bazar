@@ -9,6 +9,7 @@ import classes from './Register.module.scss';
 import PasswordInput from '../components/Styled/PasswordInput/PasswordInput';
 import { Formik } from 'formik';
 import { RegisterFormT } from './registerTypes';
+import registerSchema from './Schema';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,9 +23,10 @@ export default function Register() {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values: RegisterFormT) => {
+      validationSchema={registerSchema}
+      onSubmit={(values: RegisterFormT, { setSubmitting }) => {
         console.log(values);
-        // setSubmitting(false);
+        setSubmitting(false);
       }}
     >
       {({

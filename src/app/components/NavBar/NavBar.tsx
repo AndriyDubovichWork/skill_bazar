@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function NavBar() {
   return (
-    <div className={classes.NavBar}>
+    <header className={classes.NavBar}>
       <Link href={'/'} className={classes.Logo}>
         <h2>SkillBazar Logo</h2>
       </Link>
@@ -12,6 +12,6 @@ export default function NavBar() {
         <Link href={'/register'}>register</Link>
         <Link href={'/login'}>login</Link>
       </div>
-    </div>
+    </header>
   );
 }

@@ -7,6 +7,16 @@ const createDBConnection = async () => {
     user: 'andriy',
     password: '1234',
   });
+  connection.execute(`
+    CREATE DATABASE IF NOT EXISTS 'SkillBazar';
+
+    CREATE TABLE IF NOT EXISTS 'Users'(
+      'id' BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      'email' VARCHAR(255) NOT NULL UNIQUE,
+      'passwordHash' VARCHAR(255) NOT NULL
+    );
+  `);
+  return connection;
 };
 
 export default createDBConnection;

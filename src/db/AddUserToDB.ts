@@ -5,8 +5,7 @@ const AddUserToDB = (
   email: string,
   passwordHash: string
 ) => {
-  try {
-    connection.execute(`
+  connection.execute(`
          INSERT INTO Users(
              email,passwordHash
          )
@@ -15,9 +14,6 @@ const AddUserToDB = (
              '${passwordHash}'
          )
            `);
-  } catch (e) {
-    return e;
-  }
 };
 
 export default AddUserToDB;

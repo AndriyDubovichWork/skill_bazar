@@ -21,3 +21,10 @@ VALUES(
     "1234hash"
 )
 
+--@block
+SELECT email FROM Users
+WHERE email = 'email';
+
+
+--@block 
+DROP TABLE Users

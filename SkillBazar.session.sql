@@ -28,3 +28,6 @@ WHERE email = 'email';
 
 --@block 
 DROP TABLE Users
+
+--@block
+SELECT * FROM Users

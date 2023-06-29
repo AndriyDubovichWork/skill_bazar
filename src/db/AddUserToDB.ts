@@ -5,7 +5,7 @@ const AddUserToDB = (
   email: string,
   passwordHash: string
 ) => {
-  connection.execute(`
+  return connection.execute(`
          INSERT INTO Users(
              email,passwordHash
          )

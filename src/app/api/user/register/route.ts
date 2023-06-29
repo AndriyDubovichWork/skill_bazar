@@ -12,13 +12,17 @@ export async function POST(request: Request) {
   if (!email || !passwordHash) {
     return NextResponse.json({ error: 'Incorrect params' }, { status: 400 });
   }
-  const data = await AddUserToDB(connection, email, passwordHash);
+  try {
+    await AddUserToDB(connection, email, passwordHash);
 
-  connection.end();
-  return NextResponse.json({ email, passwordHash, data });
+    connection.end();
+    return NextResponse.json({ email, passwordHash });
+  } catch {
+    connection.end();
 
-  return NextResponse.json(
-    { error: 'user already registered' },
-    { status: 400 }
-  );
+    return NextResponse.json(
+      { error: 'user already registered' },
+      { status: 400 }
+    );
+  }
 }

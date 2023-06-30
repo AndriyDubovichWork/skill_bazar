@@ -10,6 +10,8 @@ import { Formik } from 'formik';
 import { LoginFormT } from './loginTypes';
 import registerSchema from '../register/Schema';
 
+import axios from 'axios';
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,8 +24,13 @@ export default function Login() {
     <Formik
       initialValues={initialValues}
       validationSchema={registerSchema}
-      onSubmit={(values: LoginFormT, { setSubmitting }) => {
-        console.log(values);
+      onSubmit={async (values: LoginFormT, { setSubmitting }) => {
+        const { data } = await axios.post<UserT>(
+          `http://localhost:3000/api/auth/login?email=${values.email}&password=${values.password}`
+        );
+
+        console.log(data);
+
         setSubmitting(false);
       }}
     >

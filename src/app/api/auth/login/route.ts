@@ -31,15 +31,15 @@ export async function POST(request: Request) {
     }
 
     //  if password hashes not matching throw error
-    if (await bcrypt.compare(users[0].passwordHash, passwordHash)) {
-      return NextResponse.json(
-        { error: 'incorrect email or password' },
-        { status: 400 }
-      );
+    if (await !bcrypt.compare(users[0].passwordHash, passwordHash)) {
+      return NextResponse.json({ isAllCorect: true });
     }
+    return NextResponse.json(
+      { error: 'incorrect email or password' },
+      { status: 400 }
+    );
 
     // if everything is ok than return data
-    return NextResponse.json({ isAllCorect: true });
   } catch (e) {
     //  if any other error throw error
     return NextResponse.json(

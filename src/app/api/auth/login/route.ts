@@ -1,7 +1,7 @@
-import AddUserToDB from '@/db/AddUserToDB';
-import checkifUserRegistered from '@/db/checkifUserRegistered';
-import createDBConnection from '@/db/createDBConnection';
-import hashPassword from '@/lib/hashPassword/hashPassword';
+import AddUserToDB from '@/lib/db/AddUserToDB';
+import checkifUserRegistered from '@/lib/db/checkifUserRegistered';
+import createDBConnection from '@/lib/db/createDBConnection';
+import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 type isRegisteredT = [UserT[]];
@@ -14,11 +14,10 @@ export async function POST(request: Request) {
   const email = searchParams.get('email');
   const password = searchParams.get('password');
 
-  const passwordHash = hashPassword(password);
-
-  if (!email || !passwordHash) {
+  if (!email || !password) {
     return NextResponse.json({ error: 'Incorrect params' }, { status: 400 });
   }
+  const passwordHash = await bcrypt.hash(password, 10);
 
   try {
     const [users]: any = await checkifUserRegistered(connection, email);
@@ -31,8 +30,8 @@ export async function POST(request: Request) {
       );
     }
 
-    //  if password not matching throw error
-    if (users[0].passwordHash !== passwordHash) {
+    //  if password hashes not matching throw error
+    if (await bcrypt.compare(users[0].passwordHash, passwordHash)) {
       return NextResponse.json(
         { error: 'incorrect email or password' },
         { status: 400 }
@@ -40,7 +39,7 @@ export async function POST(request: Request) {
     }
 
     // if everything is ok than return data
-    return NextResponse.json({ user: users[0] });
+    return NextResponse.json({ isAllCorect: true });
   } catch (e) {
     //  if any other error throw error
     return NextResponse.json(

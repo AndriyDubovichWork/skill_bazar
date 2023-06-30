@@ -1,6 +1,7 @@
-import AddUserToDB from '@/db/AddUserToDB';
-import createDBConnection from '@/db/createDBConnection';
+import AddUserToDB from '@/lib/db/AddUserToDB';
+import createDBConnection from '@/lib/db/createDBConnection';
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcrypt';
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,10 +9,12 @@ export async function POST(request: Request) {
   const connection = await createDBConnection();
 
   const email = searchParams.get('email');
-  const passwordHash = searchParams.get('password');
-  if (!email || !passwordHash) {
+  const password = searchParams.get('password');
+  if (!email || !password) {
     return NextResponse.json({ error: 'Incorrect params' }, { status: 400 });
   }
+  const passwordHash = await bcrypt.hash(password, 10);
+
   try {
     await AddUserToDB(connection, email, passwordHash);
 

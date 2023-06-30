@@ -31,3 +31,6 @@ DROP TABLE Users
 
 --@block
 SELECT * FROM Users
+--@block
+SELECT email FROM Users
+WHERE id = '1';

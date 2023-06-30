@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import { RegisterFormT } from './registerTypes';
 import registerSchema from './Schema';
 import ToolTip from '../components/Styled/ToolTip/ToolTip';
+import axios from 'axios';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,8 +26,14 @@ export default function Register() {
     <Formik
       initialValues={initialValues}
       validationSchema={registerSchema}
-      onSubmit={(values: RegisterFormT, { setSubmitting }) => {
+      onSubmit={async (values: RegisterFormT, { setSubmitting }) => {
         console.log(values);
+
+        const { data } = await axios.post<UserT>(
+          `http://localhost:3000/api/auth/register?email=${values.email}&password=${values.password}&passwordConfirm=${values.passwordConfirm}`
+        );
+
+        console.log(data);
         setSubmitting(false);
       }}
     >

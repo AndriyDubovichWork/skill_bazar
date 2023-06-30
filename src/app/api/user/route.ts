@@ -9,13 +9,14 @@ export async function POST(request: Request) {
   const connection = await createDBConnection();
 
   const id = searchParams.get('id');
+
   if (!id) {
     return NextResponse.json({ error: 'Incorrect params' }, { status: 400 });
   }
 
   try {
     const [users]: any = await getUserById(connection, id);
-    const user = users[0];
+    const user: UserT = users[0];
 
     connection.end();
     return NextResponse.json({ email: user.email });

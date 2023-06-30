@@ -10,9 +10,18 @@ export async function POST(request: Request) {
 
   const email = searchParams.get('email');
   const password = searchParams.get('password');
-  if (!email || !password) {
+  const passwordConfirm = searchParams.get('passwordConfirm');
+  if (!email || !password || !passwordConfirm) {
     return NextResponse.json({ error: 'Incorrect params' }, { status: 400 });
   }
+
+  if (password !== passwordConfirm) {
+    return NextResponse.json(
+      { error: 'passwords must match' },
+      { status: 400 }
+    );
+  }
+
   const passwordHash = await bcrypt.hash(password, 10);
 
   try {
@@ -25,7 +34,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { error: 'user already registered' },
-      { status: 400 }
+      { status: 400, statusText: 'user already registered' }
     );
   }
 }

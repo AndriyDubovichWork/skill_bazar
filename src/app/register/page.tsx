@@ -21,7 +21,9 @@ export default function Register() {
     password: '',
     passwordConfirm: '',
   };
-
+  if (!initialValues.email) {
+    throw new Error('hello');
+  }
   return (
     <Formik
       initialValues={initialValues}

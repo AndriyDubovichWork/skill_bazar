@@ -9,7 +9,6 @@ export default function NavBar() {
         <h2>SkillBazar Logo</h2>
       </Link>
       <div className={classes.Authorization}>
-        <Link href={'api/auth/newuser'}>new user</Link>
         <Link href={'api/auth/signin'}>signin</Link>
         <Link href={'api/auth/signout'}>signout</Link>
       </div>
